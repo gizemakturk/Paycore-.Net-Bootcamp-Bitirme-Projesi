@@ -20,7 +20,7 @@ namespace Base.Token
 
         public string Role { get; set; }
 
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         public int SessionTimeInSecond { get; set; }
     }

@@ -12,15 +12,22 @@ namespace Dto
     public class ProductDto
     {
         [Required]
-        [MaxLength(125)]
-        [UserNameAttribute]
+        [MaxLength(100)]
         [Display(Name = "Product Name")]
         public string Name { get; set; }
 
-       
-
         [Required]
         [MaxLength(500)]
+        [Display(Name = "Product Description")]
+        public string Description { get; set; }
+        [Required]
+        [Display(Name = "Product Color")]
+        public string Color { get; set; }
+        [Required]
+        [Display(Name = "Product Brand")]
+        public string Brand { get; set; }
+        [Required]
+      //  [MaxLength(500)]
         public double Price { get; set; }
 
         [Required]

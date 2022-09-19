@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Service.CategoryService.Abstract;
 using Service.CategoryService.Concrete;
 using Service.Mapper;
+using Service.OfferService.Abstract;
+using Service.OfferService.Concrete;
 using Service.ProductService.Abstract;
 using Service.ProductService.Concrete;
 using Service.Token.Abstract;
@@ -37,6 +39,8 @@ namespace WebApi.StartUpExtension
             services.AddScoped<IUserService,UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IOfferService, OfferService>();
+
             services.AddScoped<ITokenService, TokenService>();
 
 

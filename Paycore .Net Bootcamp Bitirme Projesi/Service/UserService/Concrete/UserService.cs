@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Base.Response;
+using Base.Token;
 using Data.Model;
 using Data.Repository;
 using Dto;
@@ -33,12 +34,15 @@ namespace Service.UserService.Concrete
 
         public override BaseResponse<UserDto> Insert(UserDto insertResource)
         {
+            var account = hibernateRepository.Where(x => x.Email.Equals(insertResource.Email)).FirstOrDefault();
+            if (account != null)
+                return new BaseResponse<UserDto>("User has already exists");
             byte[] hash;
             using (MD5 md5 = MD5.Create())
             {
                 hash = md5.ComputeHash(Encoding.UTF8.GetBytes(insertResource.Password));
             }
-            insertResource.Password = string.Join("", hash);
+            insertResource.Password = Encoding.UTF8.GetString(hash);
             return base.Insert(insertResource);
         }
     }

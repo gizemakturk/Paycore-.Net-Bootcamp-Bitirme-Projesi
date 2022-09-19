@@ -62,7 +62,7 @@ namespace Data.Mapping
 
             ManyToOne(x => x.Category, m => m.Column("CategoryId"));
             ManyToOne(x => x.User, m => m.Column("UserId"));
-
+            Bag(x => x.Offers, m => m.Key(k => k.Column("Id")), rel => rel.OneToMany());
             Table("product");
     }
 }

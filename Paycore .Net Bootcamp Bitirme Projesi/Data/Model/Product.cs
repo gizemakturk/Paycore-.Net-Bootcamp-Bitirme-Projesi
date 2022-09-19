@@ -11,6 +11,8 @@ namespace Data.Model
         public virtual int Id { get; set; }
         
         public virtual string Name { get; set; }
+        public virtual string Description { get; set; }
+        public virtual string Brand { get; set; }
         public virtual string Color { get; set; }
         public virtual double Price { get; set; }
         public virtual DateTime  AddedDate{ get; set; }
@@ -20,7 +22,7 @@ namespace Data.Model
         public virtual int UserId { get; set; }
         public virtual User  User { get; set; }
 
-
+        public virtual IList<Offer> Offers { get; set; }
         public virtual Category Category { get; set; }
 
 

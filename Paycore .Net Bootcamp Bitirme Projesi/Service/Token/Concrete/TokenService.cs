@@ -45,7 +45,7 @@ namespace Service.Token.Concrete
                     return new BaseResponse<TokenResponse>("Please enter valid informations.");
                 }
 
-                var account = hibernateRepository.Where(x => x.UserName.Equals(tokenRequest.UserName)).FirstOrDefault();
+                var account = hibernateRepository.Where(x => x.Email.Equals(tokenRequest.Email)).FirstOrDefault();
                 if (account is null)
                 {
                     return new BaseResponse<TokenResponse>("Please validate your informations that you provided.");
@@ -55,7 +55,7 @@ namespace Service.Token.Concrete
                 {
                     hash = md5.ComputeHash(Encoding.UTF8.GetBytes(tokenRequest.Password));
                 }
-                tokenRequest.Password = string.Join("", hash);
+                tokenRequest.Password = Encoding.UTF8.GetString(hash);
                 if (!account.Password.Equals(tokenRequest.Password))
                 {
                     return new BaseResponse<TokenResponse>("Please validate your informations that you provided.");
@@ -85,7 +85,7 @@ namespace Service.Token.Concrete
                     AccessToken = token,
                     ExpireTime = now.AddMinutes(jwtConfig.AccessTokenExpiration),
                     Role = Role.Viewer.ToString(),
-                    UserName = account.UserName,
+                    Email = account.Email,
                     SessionTimeInSecond = jwtConfig.AccessTokenExpiration * 60
                 };
 

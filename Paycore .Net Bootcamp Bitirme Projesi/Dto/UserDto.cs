@@ -26,6 +26,8 @@ namespace Dto
         public string LastName { get; set; }
 
         [Required]
+        [MaxLength(20)]
+        [MinLength(8)]
         public string Password { get; set; }
 
         [Required]
