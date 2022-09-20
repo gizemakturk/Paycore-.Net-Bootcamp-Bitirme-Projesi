@@ -30,9 +30,10 @@ namespace Data.Mapping
             x.NotNullable(true);
         });
             ManyToOne(x => x.Product, m => m.Column("ProductId"));
+            ManyToOne(x => x.User, m => m.Column("UserId"));
 
 
-
+            
             Table("offer");
     }
 }

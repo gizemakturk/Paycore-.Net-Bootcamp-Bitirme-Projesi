@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using Base.Response;
+using Data.Model;
 using Dto;
 using Service.Base.Abstract;
 using System;
@@ -11,5 +12,6 @@ namespace Service.UserService.Abstract
 {
     public interface IUserService : IBaseService<UserDto, User>
     {
+        BaseResponse<IEnumerable<OfferDto>> GetAllOffers();
     }
 }

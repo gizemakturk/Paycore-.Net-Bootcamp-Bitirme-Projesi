@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Service.AuthenticatedUserServices.Abstract;
+using Service.AuthenticatedUserServices.Concrete;
 using Service.CategoryService.Abstract;
 using Service.CategoryService.Concrete;
 using Service.Mapper;
@@ -35,11 +37,13 @@ namespace WebApi.StartUpExtension
 
         public static void AddServices(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             // services 
             services.AddScoped<IUserService,UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IOfferService, OfferService>();
+          //  services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 
             services.AddScoped<ITokenService, TokenService>();
 

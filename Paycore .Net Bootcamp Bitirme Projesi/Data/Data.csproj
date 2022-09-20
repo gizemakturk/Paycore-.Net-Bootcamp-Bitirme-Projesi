@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.9" />
     <PackageReference Include="Npgsql" Version="6.0.7" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Base.Response;
+using Data.Model;
 using Dto;
 using Microsoft.AspNetCore.Mvc;
 using Service.ProductService.Abstract;
@@ -29,11 +30,18 @@ namespace WebApi.Controllers
             var response = productService.GetAll();
             return response;
         }
+        [HttpGet("GetAllProductsByCategoryId")]
+        public BaseResponse<IEnumerable<ProductDto>> GetAllProductsByCategoryId(int categoryId)
+        {
+            var response = productService.GetAllProductsByCategoryId(categoryId);
+            return response;
+        }
 
         [HttpGet("{id}")]
         public BaseResponse<ProductDto> GetById(int id)
         {
             var response = productService.GetById(id);
+           
             return response;
         }
 
@@ -51,7 +59,13 @@ namespace WebApi.Controllers
             return response;
 
         }
+        [HttpPost("Sold")]
+        public BaseResponse<ProductDto> Sold(int productId)
+        {
+            var response = productService.Sold(productId);
+            return response;
 
+        }
         [HttpPut("{id}")]
         public BaseResponse<ProductDto> Update(int id, [FromBody] ProductDto dto)
         {

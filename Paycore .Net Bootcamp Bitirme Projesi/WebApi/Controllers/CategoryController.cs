@@ -25,7 +25,7 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "viewer")]
+  //      [Authorize(Roles = "viewer")]
         public BaseResponse<IEnumerable<CategoryDto>> GetAll()
         {
             var response = categoryService.GetAll();

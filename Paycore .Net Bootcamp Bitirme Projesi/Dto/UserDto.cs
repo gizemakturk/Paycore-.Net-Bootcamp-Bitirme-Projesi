@@ -12,16 +12,16 @@ namespace Dto
     public class UserDto
     {
         [Required]
-        [MaxLength(500)]
+        [MaxLength(50)]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
         [Required]
-        [MaxLength(500)]
+        [MaxLength(50)]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength(50)]
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 

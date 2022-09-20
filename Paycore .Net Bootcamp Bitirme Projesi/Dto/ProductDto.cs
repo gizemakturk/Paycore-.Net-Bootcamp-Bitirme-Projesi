@@ -1,4 +1,5 @@
 ﻿using Base.Attribute;
+using Data.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,28 +20,32 @@ namespace Dto
         [Required]
         [MaxLength(500)]
         [Display(Name = "Product Description")]
-        public string Description { get; set; }
-        [Required]
-        [Display(Name = "Product Color")]
-        public string Color { get; set; }
+        public string Description { get; set; } 
         [Required]
         [Display(Name = "Product Brand")]
         public string Brand { get; set; }
+         [Required]
+        [Display(Name = "Product Color")]
+        public string Color { get; set; }
         [Required]
-      //  [MaxLength(500)]
         public double Price { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [MaxLength(500)]
-        public string Email { get; set; }
-
-
-  
-
 
         [Display(Name = "Added Date")]
         public DateTime AddedDate { get; set; }
+
+        [Display(Name = "isOfferable")]
+        public virtual bool isOfferable { get; set; }
+
+        [Display(Name = "isSold")]
+        public virtual bool isSold { get; set; }
+
+        [Required]
+        [Display(Name = "CategoryId")]
+        public int CategoryId { get; set; }
+     
+
+
+
     }
 }
 

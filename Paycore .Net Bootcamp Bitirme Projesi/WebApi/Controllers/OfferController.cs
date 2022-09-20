@@ -47,7 +47,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public BaseResponse<OfferDto> Create([FromBody] OfferDto dto)
+        public BaseResponse<OfferDto> GiveOffer([FromBody] OfferDto dto)
         {
             var response = offerService.Insert(dto);
             return response;

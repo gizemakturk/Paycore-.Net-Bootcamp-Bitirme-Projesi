@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Service.AuthenticatedUserServices.Abstract;
+using Service.AuthenticatedUserServices.Concrete;
 using Service.EmailService.Abstract;
 using Service.EmailService.Concrete;
 using System.Net;
@@ -65,7 +67,7 @@ namespace WebApi
             //});
 
             services.AddControllers();
-
+            services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
         }
 
 

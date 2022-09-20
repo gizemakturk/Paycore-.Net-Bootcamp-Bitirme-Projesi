@@ -17,10 +17,9 @@ namespace Data.Mapping
         {
             Id(x => x.Id, x =>
             {
-                x.Type(NHibernateUtil.Int32);
+                x.Type(NHibernateUtil.String);
                 x.Column("Id");
-                x.UnsavedValue(0);
-                x.Generator(Generators.Increment);
+                x.Generator(Generators.Identity);
             });
 
             Property(b => b.FirstName, x =>
@@ -55,7 +54,6 @@ namespace Data.Mapping
             });
         
             Bag(x => x.Products, m => m.Key(k => k.Column("Id")), rel => rel.OneToMany());
-
             Table("user");
         }
     }

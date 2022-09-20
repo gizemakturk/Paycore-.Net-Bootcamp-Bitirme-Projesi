@@ -17,9 +17,9 @@ namespace Data.Model
         public virtual double Price { get; set; }
         public virtual DateTime  AddedDate{ get; set; }
         public virtual bool isOfferable { get; set; }
-        public virtual bool isSold { get; set; }
+        public virtual bool isSold { get; set; } = false;
          public  virtual int CategoryId { get; set; }
-        public virtual int UserId { get; set; }
+        public virtual int? UserId { get; set; }
         public virtual User  User { get; set; }
 
         public virtual IList<Offer> Offers { get; set; }

@@ -12,8 +12,10 @@ namespace Data.Model
         public virtual int Id { get; set; }
         [Required]
         public virtual int? Amount { get; set; }
-       // public virtual int? Percentage { get; set; }
+        // public virtual int? Percentage { get; set; }
         public virtual int ProductId { get; set; }
         public virtual Product Product { get; set; }
+        public virtual string UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

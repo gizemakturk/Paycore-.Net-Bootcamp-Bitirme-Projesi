@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using Base.Response;
+using Data.Model;
 using Dto;
 using Service.Base.Abstract;
 using System;
@@ -12,5 +13,9 @@ namespace Service.ProductService.Abstract
 
     public interface IProductService : IBaseService<ProductDto, Product>
     {
+        BaseResponse<IEnumerable<ProductDto>> GetAllProductsByCategoryId(int categoryId);
+        BaseResponse<ProductDto> Sold(int productId);
+
+
     }
 }

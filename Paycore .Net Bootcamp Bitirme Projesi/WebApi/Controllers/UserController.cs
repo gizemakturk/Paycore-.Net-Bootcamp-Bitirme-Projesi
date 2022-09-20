@@ -16,14 +16,16 @@ namespace WebApi.Controllers
     {
         private readonly IUserService userService;
         private readonly IMapper mapper; 
-        private readonly IEmailService _emailService;
+    //  private readonly IEmailService _emailService;
 
 
-        public UserController(IUserService userService, IMapper mapper, IEmailService emailService)
+        public UserController(IUserService userService, IMapper mapper
+            //, IEmailService emailService
+            )
         {
             this.userService = userService;
             this.mapper = mapper;
-            _emailService = emailService;
+      //      _emailService = emailService;
         }
 
 
@@ -31,6 +33,7 @@ namespace WebApi.Controllers
         public BaseResponse<IEnumerable<UserDto>> GetAll()
         {
             var response = userService.GetAll();
+          
             return response;
         }
 
@@ -51,9 +54,10 @@ namespace WebApi.Controllers
         [HttpPost]
         public BaseResponse<UserDto> Create([FromBody] UserDto dto)
         {
+          
             var response = userService.Insert(dto);
-            MailRequest mail2 = new MailRequest() { Body = "Blocked", Status = false, Subject = "Access denied", ToEmail = response.Response.Email };
-            _emailService.SendEmailIntoQueue(mail2);
+          //  MailRequest mail2 = new MailRequest() { Body = "Blocked", Status = false, Subject = "Access denied", ToEmail = response.Response.Email};
+        //    _emailService.SendEmailIntoQueue(mail2);
             return response;
         }
 
