@@ -20,7 +20,7 @@ namespace Service.EmailService.Concrete
         public RabbitMQService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _factory = new ConnectionFactory() { Uri = new Uri(_configuration.GetSection("RabbitMqSettings:URL").Value) };
+            _factory = new ConnectionFactory() { HostName = "localhost" };
         }
 
         public void Publish(MailRequest mailRequest)

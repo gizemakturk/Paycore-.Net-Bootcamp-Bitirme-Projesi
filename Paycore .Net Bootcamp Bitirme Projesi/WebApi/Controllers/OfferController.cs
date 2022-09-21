@@ -32,17 +32,25 @@ namespace WebApi.Controllers
             return response;
         }
 
-        [HttpGet("{id}")]
-        public BaseResponse<OfferDto> GetById(int id)
+        [HttpGet("GetAllOffersOfProducts")]
+        //[Authorize(Roles = "viewer")]
+        public BaseResponse<IEnumerable<OfferDto>> GetAllOffer()
         {
-            var response = offerService.GetById(id);
+            var response = offerService.GetAllOffers();
             return response;
         }
 
-        [HttpDelete("{id}")]
-        public BaseResponse<OfferDto> Delete(int id)
+        [HttpGet("AcceptOffer")]
+        public BaseResponse<ProductDto> GetById(int id)
         {
-            var response = offerService.Remove(id);
+            var response = offerService.AcceptOffer(id);
+            return response;
+        }
+
+        [HttpDelete("DeclineOffer")]
+        public BaseResponse<string> Delete(int id)
+        {
+            var response = offerService.DeclineOffer(id);
             return response;
         }
 

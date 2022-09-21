@@ -36,7 +36,7 @@ namespace Data.Mapping
             x.Type(NHibernateUtil.String);
             x.NotNullable(true);
         });
-            Bag(x => x.Products, m => m.Key(k => k.Column("Id")), rel => rel.OneToMany());
+
           
             Table("category");
     }

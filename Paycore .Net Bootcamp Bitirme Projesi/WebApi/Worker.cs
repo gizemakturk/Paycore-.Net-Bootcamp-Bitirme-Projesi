@@ -29,7 +29,10 @@ namespace BackgroundWorker
         {
             _logger = logger;
             _mailSettings = mailSettings.Value;
-            _factory = new ConnectionFactory() { HostName = "localhost" };
+            _factory = new ConnectionFactory()
+            {
+                HostName = "localhost"
+            };
 
         }
 
@@ -55,7 +58,7 @@ namespace BackgroundWorker
                     _logger.LogInformation($"Email: {Encoding.UTF8.GetString(e.Body.ToArray())}");
 
                     var data = JsonConvert.DeserializeObject<MailRequest>(Encoding.UTF8.GetString(e.Body.ToArray()));
-                    email = new MailMessage() { Body = data.Body, From = new MailAddress("E-posta adresiniz"), Subject = data.Subject, Sender = new MailAddress("E-posta adresiniz") };
+                    email = new MailMessage() { Body = data.Body, From = new MailAddress("mail"), Subject = data.Subject, Sender = new MailAddress("mail") };
                     email.To.Add(new MailAddress(data.ToEmail));
 
                     await SendEmail(email);
@@ -77,7 +80,7 @@ namespace BackgroundWorker
                 Port = 587,
                 Host = "smtp.gmail.com",
                 Credentials = new NetworkCredential(
-                "karagoz.mhmtg@gmail.com", "32M32k07."),
+                "mail", "password"),
                 EnableSsl = true
             };
 

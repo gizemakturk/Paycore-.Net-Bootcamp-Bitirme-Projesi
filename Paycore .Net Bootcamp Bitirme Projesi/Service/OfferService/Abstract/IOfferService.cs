@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using Base.Response;
+using Data.Model;
 using Dto;
 using Service.Base.Abstract;
 using System;
@@ -11,5 +12,8 @@ namespace Service.OfferService.Abstract
 {
     public interface IOfferService : IBaseService<OfferDto, Offer>
     {
+        public BaseResponse<IEnumerable<OfferDto>> GetAllOffers();
+        public BaseResponse<ProductDto> AcceptOffer(int id);
+        public BaseResponse<string> DeclineOffer(int id);
     }
 }

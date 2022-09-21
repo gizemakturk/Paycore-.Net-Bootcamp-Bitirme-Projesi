@@ -53,7 +53,7 @@ namespace Data.Mapping
                 x.NotNullable(true);
             });
         
-            Bag(x => x.Products, m => m.Key(k => k.Column("Id")), rel => rel.OneToMany());
+            Bag(x => x.Products, m => m.Key(k => k.Column("id")), rel => rel.OneToMany());
             Table("user");
         }
     }

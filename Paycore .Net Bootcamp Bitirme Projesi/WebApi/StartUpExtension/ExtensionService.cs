@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
+using BackgroundWorker;
+using Data.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.AuthenticatedUserServices.Abstract;
 using Service.AuthenticatedUserServices.Concrete;
 using Service.CategoryService.Abstract;
 using Service.CategoryService.Concrete;
+using Service.EmailService.Abstract;
+using Service.EmailService.Concrete;
 using Service.Mapper;
 using Service.OfferService.Abstract;
 using Service.OfferService.Concrete;
@@ -33,6 +37,11 @@ namespace WebApi.StartUpExtension
             //    options.ConfigurationOptions = configurationOptions;
             //    options.InstanceName = Configuration["Redis:InstanceName"];
             //});
+            MailSettings mailSettings = Configuration.GetSection("MailSettings").Get<MailSettings>();
+            services.AddSingleton(mailSettings);
+            services.AddScoped<IRabbitMQService, RabbitMQService>();
+            services.AddScoped<IEmailService, MailService>();
+            services.AddHostedService<Worker>();
         }
 
         public static void AddServices(this IServiceCollection services)

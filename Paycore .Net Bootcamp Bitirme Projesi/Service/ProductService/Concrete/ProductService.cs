@@ -5,6 +5,7 @@ using Data.Repository;
 using Dto;
 using FluentNHibernate.Data;
 using NHibernate;
+using NHibernate.Transform;
 using Serilog;
 using Service.AuthenticatedUserServices.Abstract;
 using Service.Base.Concrete;
@@ -23,6 +24,7 @@ namespace Service.ProductService.Concrete
         protected readonly ISession session;
         protected readonly IMapper mapper;
         protected readonly IHibernateRepository<Product> hibernateRepository;
+        protected readonly IHibernateRepository<Category> hibernateCategoryRepository;
         private readonly IAuthenticatedUserService _authenticatedUser;
 
 
@@ -33,15 +35,17 @@ namespace Service.ProductService.Concrete
 
             hibernateRepository = new HibernateRepository<Product>(session);
             _authenticatedUser = authenticatedUser;
+            this.hibernateCategoryRepository = new HibernateRepository<Category>(session);
         }
 
-        public BaseResponse<IEnumerable<ProductDto>> GetAllProductsByCategoryId(int categoryId)
+        public override BaseResponse<IEnumerable<ProductDto>> GetAll()
         {
             try
             {
-                var tempEntity = hibernateRepository.Entities.ToList().Where(x => x.CategoryId == categoryId);
+                var tempEntity = session.CreateSQLQuery("SELECT * FROM product WHERE userid='" + _authenticatedUser.UserId + "'").SetResultTransformer(Transformers.AliasToBean<Product>()).List<Product>().ToList();
                 var result = mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(tempEntity);
                 return new BaseResponse<IEnumerable<ProductDto>>(result);
+           
             }
             catch (Exception ex)
             {
@@ -49,7 +53,48 @@ namespace Service.ProductService.Concrete
                 return new BaseResponse<IEnumerable<ProductDto>>(ex.Message);
             }
         }
-      
+
+        public BaseResponse<IEnumerable<ProductDto>> GetAllProductsByCategoryId(int categoryId)
+        {
+            try
+            {
+                var tempEntity = session.CreateSQLQuery("SELECT * FROM product WHERE userid='" + _authenticatedUser.UserId + "' AND categoryid=" + categoryId).SetResultTransformer(Transformers.AliasToBean<Product>()).List<Product>().ToList();
+                var result = mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(tempEntity);
+                return new BaseResponse<IEnumerable<ProductDto>>(result);
+                //var products = hibernateRepository.Entities.Where(x => x.Category != null && x.CategoryId == categoryId && x.UserId != null && x.UserId.Equals(_authenticatedUser.UserId)).ToList();
+                //var result = mapper.Map<List<Product>, List<ProductDto>>(products);
+                //return new BaseResponse<IEnumerable<ProductDto>>(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("BaseService.GetAll", ex);
+                return new BaseResponse<IEnumerable<ProductDto>>(ex.Message);
+            }
+        }
+
+        public override BaseResponse<ProductDto> Insert(ProductDto insertResource)
+        {
+            try
+            {
+                var tempEntity = mapper.Map<ProductDto, Product>(insertResource);
+                tempEntity.CategoryId = insertResource.CategoryId;
+                tempEntity.Category = hibernateCategoryRepository.GetById(insertResource.CategoryId);
+                tempEntity.UserId = _authenticatedUser.UserId;
+                tempEntity.User = session.Get<User>(_authenticatedUser.UserId);
+                var result = mapper.Map<Product, ProductDto>(tempEntity);
+                hibernateRepository.BeginTransaction();
+                hibernateRepository.Save(tempEntity);
+                hibernateRepository.Commit();
+
+                hibernateRepository.CloseTransaction();
+                return new BaseResponse<ProductDto>(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("BaseService.Insert", ex);
+                return new BaseResponse<ProductDto>(ex.Message);
+            }
+        }
 
         public BaseResponse<ProductDto> Sold(int productId)
         {
@@ -57,9 +102,9 @@ namespace Service.ProductService.Concrete
             {
                 var tempEntity = hibernateRepository.GetById(productId);
 
-                tempEntity.UserId = Convert.ToInt32(_authenticatedUser.UserId);
+                tempEntity.UserId = _authenticatedUser.UserId;
                 tempEntity.isSold = true;
-                tempEntity.isOfferable = false;
+                tempEntity.isOfferable = true;
                 ProductDto resource = mapper.Map<Product, ProductDto>(tempEntity);
 
                 hibernateRepository.BeginTransaction();

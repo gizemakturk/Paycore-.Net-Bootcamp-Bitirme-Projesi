@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Base.Response;
-using Data.Model;
 using Dto;
 using Microsoft.AspNetCore.Mvc;
 using Service.ProductService.Abstract;
