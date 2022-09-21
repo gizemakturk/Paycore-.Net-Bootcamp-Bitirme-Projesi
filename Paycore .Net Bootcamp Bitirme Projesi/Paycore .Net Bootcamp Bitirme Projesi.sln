@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundWorker", "BackgroundWorker\BackgroundWorker.csproj", "{99DE4207-321A-4BF8-AC5A-9FFD0256508A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireProject", "HangFire\HangFireProject.csproj", "{F017494B-E886-4D69-BA71-804314CA6D46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangFireProject", "HangFire\HangFireProject.csproj", "{F017494B-E886-4D69-BA71-804314CA6D46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{6174FB95-9A22-4FA7-88BC-93EC3E88B225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F017494B-E886-4D69-BA71-804314CA6D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F017494B-E886-4D69-BA71-804314CA6D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F017494B-E886-4D69-BA71-804314CA6D46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6174FB95-9A22-4FA7-88BC-93EC3E88B225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6174FB95-9A22-4FA7-88BC-93EC3E88B225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6174FB95-9A22-4FA7-88BC-93EC3E88B225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6174FB95-9A22-4FA7-88BC-93EC3E88B225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
