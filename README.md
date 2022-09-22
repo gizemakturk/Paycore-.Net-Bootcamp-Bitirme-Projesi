@@ -13,11 +13,13 @@ Depending on the platform you are using, you can download its file from the clon
 
 To use the program, first you need to change the configurations up to you.(like database settings).You can then log into the program. But first, you must the create account. When you log in to the program, you need to authoritize with token response.
 
-![account](screenshots/account.png)
+![account](screenshots/user.png)
 
 Users can have products. You can create with CreteProduct endpoint. But first you need to create category of product. Then you can give a id of category to product's category.
 
-![products](screenshots/products.png)
+![products](screenshots/product.png)
+![offers](screenshots/offer.png)
+![categories](screenshots/category.png)
 
 User also can get all categories and add or update the category.
 
