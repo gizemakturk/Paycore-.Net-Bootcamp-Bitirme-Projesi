@@ -25,7 +25,7 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        //[Authorize(Roles = "viewer")]
+       [Authorize(Roles = "viewer")]
         public BaseResponse<IEnumerable<OfferDto>> GetAll()
         {
             var response = offerService.GetAll();
@@ -33,7 +33,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllOffersOfProducts")]
-        //[Authorize(Roles = "viewer")]
+    [Authorize(Roles = "viewer")]
         public BaseResponse<IEnumerable<OfferDto>> GetAllOffer()
         {
             var response = offerService.GetAllOffers();
@@ -41,6 +41,8 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("AcceptOffer")]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<ProductDto> GetById(int id)
         {
             var response = offerService.AcceptOffer(id);
@@ -48,6 +50,8 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("DeclineOffer")]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<string> Delete(int id)
         {
             var response = offerService.DeclineOffer(id);
@@ -55,6 +59,8 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<OfferDto> GiveOffer([FromBody] OfferDto dto)
         {
             var response = offerService.Insert(dto);
@@ -62,6 +68,8 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<OfferDto> Update(int id, [FromBody] OfferDto dto)
         {
             var response = offerService.Update(id, dto);

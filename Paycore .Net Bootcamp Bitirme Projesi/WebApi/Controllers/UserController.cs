@@ -2,6 +2,7 @@
 using Base.Response;
 using Data.Model;
 using Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.EmailService.Abstract;
 using Service.UserService.Abstract;
@@ -30,6 +31,8 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
+
         public BaseResponse<IEnumerable<UserDto>> GetAll()
         {
             var response = userService.GetAll();
@@ -38,6 +41,8 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
+
         public BaseResponse<UserDto> GetById(int id)
         {
             var response = userService.GetById(id);
@@ -45,6 +50,7 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public BaseResponse<UserDto> Delete(int id)
         {
             var response = userService.Remove(id);
@@ -62,6 +68,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "viewer")]
         public BaseResponse<UserDto> Update(int id, [FromBody] UserDto dto)
         {
             var response = userService.Update(id, dto);

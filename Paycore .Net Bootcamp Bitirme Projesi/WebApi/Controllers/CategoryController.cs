@@ -25,7 +25,7 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-  //      [Authorize(Roles = "viewer")]
+        [Authorize(Roles = "viewer")]
         public BaseResponse<IEnumerable<CategoryDto>> GetAll()
         {
             var response = categoryService.GetAll();
@@ -33,6 +33,8 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<CategoryDto> GetById(int id)
         {
             var response = categoryService.GetById(id);
@@ -40,6 +42,8 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<CategoryDto> Delete(int id)
         {
             var response = categoryService.Remove(id);
@@ -47,6 +51,8 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<CategoryDto> Create([FromBody] CategoryDto dto)
         {
             var response = categoryService.Insert(dto);
@@ -54,6 +60,8 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "viewer")]
+
         public BaseResponse<CategoryDto> Update(int id, [FromBody] CategoryDto dto)
         {
             var response = categoryService.Update(id, dto);
